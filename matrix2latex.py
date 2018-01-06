@@ -1,5 +1,12 @@
 import numpy as np
 
+def print_number(f, number):
+    if number.is_integer():
+        number = int(number)
+    else:
+        number = round(number, 2)
+    f.write(str(number))
+
 def matrix2latex(filename, matrix):
     f = open(filename, "w");
 
@@ -13,7 +20,9 @@ def matrix2latex(filename, matrix):
             matrix = np.reshape(matrix, s)
         for i in range(s[0]):
             for j in range(s[1] - 1):
-                f.write(str(matrix[i, j]) + '&')
-            f.write(str(matrix[i, -1]) + "\\\\\n")
+                print_number(f, matrix[i, j])
+                f.write('&')
+            print_number(f, matrix[i, -1])
+            f.write("\\\\\n")
 
     f.close()
