@@ -1,10 +1,11 @@
 import numpy as np
 
 def print_number(f, number):
-    if number.is_integer():
-        number = int(number)
-    else:
-        number = round(number, 2)
+    if not type(number) == int:
+        if number.is_integer():
+            number = int(number)
+        else:
+            number = round(number, 2)
     f.write(str(number))
 
 def matrix2latex(filename, matrix):
