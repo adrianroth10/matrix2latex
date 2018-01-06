@@ -10,6 +10,7 @@ def matrix2latex(filename, matrix):
         s = matrix.shape
         if len(s) == 1:
             s = (1, s[0])
+            matrix = np.reshape(matrix, s)
         for i in range(s[0]):
             for j in range(s[1] - 1):
                 f.write(str(matrix[i, j]) + '&')
