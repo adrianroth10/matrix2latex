@@ -8,22 +8,32 @@ def print_number(f, number):
             number = round(number, 2)
     f.write(str(number))
 
-def matrix2latex(filename, matrix):
+def scalar2latex(filename, scalar):
     f = open(filename, "w");
+    print_number(f, scalar)
+    f.close()
 
+def vector2latex(filename, vector):
+    f = open(filename, "w");
+    s = vector.size
+    for i in range(s - 1):
+        print_number(f, vector[i])
+        f.write('&')
+    print_number(f, vector[-1])
+    f.close()
 
+def matrix2latex(filename, matrix):
     if not type(matrix) == np.ndarray:
-        f.write(str(matrix))
+        scalar2latex(filename, matrix)
+    elif len(matrix.shape) == 1:
+        vector2latex(filename, matrix)
     else:
-        s = matrix.shape
-        if len(s) == 1:
-            s = (1, s[0])
-            matrix = np.reshape(matrix, s)
-        for i in range(s[0]):
-            for j in range(s[1] - 1):
+        f = open(filename, "w");
+        r, c = matrix.shape
+        for i in range(r):
+            for j in range(c - 1):
                 print_number(f, matrix[i, j])
                 f.write('&')
             print_number(f, matrix[i, -1])
             f.write("\\\\\n")
-
-    f.close()
+        f.close()
