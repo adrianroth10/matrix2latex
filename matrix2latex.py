@@ -5,7 +5,8 @@ def print_number(f, number):
         if number.is_integer():
             number = int(number)
         else:
-            number = round(number, 2)
+            number = round(number,
+                        -int(np.floor(np.log10(abs(number)))) + 1)
     f.write(str(number))
 
 def scalar2latex(filename, scalar):
