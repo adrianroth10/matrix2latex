@@ -1,12 +1,11 @@
 import numpy as np
 
+# number = round(number,
+#             -int(np.floor(np.log10(abs(number)))) + 1)
 def print_number(f, number):
     if not type(number) == int:
         if number.is_integer():
             number = int(number)
-        else:
-            number = round(number,
-                        -int(np.floor(np.log10(abs(number)))) + 1)
     f.write(str(number))
 
 def scalar2latex(filename, scalar):
